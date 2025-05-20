@@ -50,7 +50,7 @@ public class DB {
 		}
 	}
 	
-	public void closeStatment(Statement st) {
+	public static void closeStatment(Statement st) {
 		try {
 			st.close();
 		}catch(SQLException e) {
@@ -58,7 +58,7 @@ public class DB {
 		}
 	}
 	
-	public void closeResultSet(ResultSet rs) {
+	public  static void closeResultSet(ResultSet rs) {
 		try{
 			rs.close();
 		}

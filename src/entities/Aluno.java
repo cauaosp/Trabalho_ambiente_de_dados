@@ -1,16 +1,19 @@
 package entities;
 
-public class Aluno {
+import java.io.Serializable;
 
+public class Aluno implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private  Integer matricula;
 	private String   name;
-	private Double nota1;
-	private Double nota2;
-	private Double nota3;
+	private Integer nota1;
+	private Integer nota2;
+	private Integer nota3;
 	private Double media;  
 	private String status;
 	
-	public Aluno(Integer matricula, String name, Double nota1, Double nota2, Double nota3, Double media,
+	public Aluno(Integer matricula, String name, Integer nota1, Integer nota2, Integer nota3, Double media,
 			String status) {
 		super();
 		this.matricula = matricula;
@@ -38,27 +41,27 @@ public class Aluno {
 		this.name = name;
 	}
 
-	public Double getNota1() {
+	public Integer getNota1() {
 		return nota1;
 	}
 
-	public void setNota1(Double nota1) {
+	public void setNota1(Integer nota1) {
 		this.nota1 = nota1;
 	}
 
-	public Double getNota2() {
+	public Integer getNota2() {
 		return nota2;
 	}
 
-	public void setNota2(Double nota2) {
+	public void setNota2(Integer nota2) {
 		this.nota2 = nota2;
 	}
 
-	public Double getNota3() {
+	public Integer getNota3() {
 		return nota3;
 	}
 
-	public void setNota3(Double nota3) {
+	public void setNota3(Integer nota3) {
 		this.nota3 = nota3;
 	}
 
