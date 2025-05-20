@@ -13,6 +13,8 @@ public class Aluno implements Serializable {
 	private Double media;  
 	private String status;
 	
+	public Aluno() {}
+	
 	public Aluno(Integer matricula, String name, Integer nota1, Integer nota2, Integer nota3, Double media,
 			String status) {
 		super();
@@ -79,6 +81,12 @@ public class Aluno implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public Double calcularMedia() {
+	double media = 0;
+		media += (nota1 + this.nota2 + this.nota3) / 3 ;
+	return media;
 	}
 
 	@Override

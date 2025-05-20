@@ -32,7 +32,7 @@ public class AlunoDaoJdbc implements AlunoDao {
 			st.setInt(3, obj.getNota1());
 			st.setInt(4, obj.getNota2());
 			st.setInt(5, obj.getNota3());
-			st.setDouble(6, obj.getMedia());
+			st.setDouble(6, obj.calcularMedia());
 			st.setString(7, obj.getStatus());
 
 		
@@ -57,6 +57,8 @@ public class AlunoDaoJdbc implements AlunoDao {
 	@Override
 	public void update(Aluno obj) {
 		// TODO Auto-generated method stub
+		
+		
 
 	}
 
