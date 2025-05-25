@@ -50,20 +50,24 @@ public class DB {
 		}
 	}
 	
-	public static void closeStatment(Statement st) {
+	public static void closeStatement(Statement st) {
+	 if(conn != null) {	
 		try {
 			st.close();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+    }
 	}
 	
 	public  static void closeResultSet(ResultSet rs) {
+		if(conn != null) {
 		try{
 			rs.close();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-	}
+    }	
+ }
 }

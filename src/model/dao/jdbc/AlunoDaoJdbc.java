@@ -49,7 +49,7 @@ public class AlunoDaoJdbc implements AlunoDao {
 
 		}
 		finally {
-		 DB.closeStatment(st);
+		 DB.closeStatement(st);
 		}
 
 	}
@@ -77,7 +77,7 @@ public class AlunoDaoJdbc implements AlunoDao {
 			 throw new DbException(e.getMessage());
 		}
 		finally {
-			DB.closeStatment(st);
+			DB.closeStatement(st);
 		}
 
 	}
@@ -103,7 +103,7 @@ public class AlunoDaoJdbc implements AlunoDao {
 			throw new DbException(e.getMessage());
 		}
 		finally {
-			DB.closeStatment(st);
+			DB.closeStatement(st);
 		}
 
 	}
