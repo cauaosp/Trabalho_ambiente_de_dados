@@ -2,13 +2,14 @@ package model.dao;
 
 import java.util.List;
 
-import entities.Aluno;
+import entities.Alunos;
 
 public interface AlunoDao {
 	
-	  void insert(Aluno obj);
-      void update(Aluno obj);
-      void deleteById(Integer id);
-      void findById(Integer id);
-      List<Aluno> findALL();
+	  void insert(Alunos obj);
+      void update(Alunos obj);
+      void deleteByMatricula(String matricula);
+      void findByStatus(String status);
+      List<Alunos> findALL();
+	
 }

@@ -3,11 +3,12 @@ package model.dao.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import db.DB;
 import db.DbException;
-import entities.Aluno;
+import entities.Alunos;
 import model.dao.AlunoDao;
 
 public class AlunoDaoJdbc implements AlunoDao {
@@ -19,22 +20,21 @@ public class AlunoDaoJdbc implements AlunoDao {
 	}
 
 	@Override
-	public void insert(Aluno obj) {
+	public void insert(Alunos obj) {
 		// TODO Auto-generated method stub
 
+	   // media e status não serão permitidos inserts pelo usuário.
+		//matricula permitida insert pelo usuário para facilitar teste do trabalho.
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-					"insert into aluno(matricula,nome,nota1,nota2,nota3,media,status) " + "values(?,?,?,?,?,?,?) ");
+					"insert into alunos(nome,matricula,data_nascimento) "
+			+ "values(?,?,?) ", Statement.RETURN_GENERATED_KEYS );
 
-			st.setInt(1, obj.getMatricula());
-			st.setString(2, obj.getName());
-			st.setInt(3, obj.getNota1());
-			st.setInt(4, obj.getNota2());
-			st.setInt(5, obj.getNota3());
-			st.setDouble(6, obj.calcularMedia());
-			st.setString(7, obj.getStatus());
-
+		   
+			st.setString(1,obj.getNome());
+			st.setString(2, obj.getMatricula());
+			st.setDate(3, new java.sql.Date(obj.getDataNascimento().getTime()));
 		
 
 			int rowsaffected = st.executeUpdate();
@@ -55,22 +55,42 @@ public class AlunoDaoJdbc implements AlunoDao {
 	}
 
 	@Override
-	public void update(Aluno obj) {
+	public void update(Alunos obj) {
 		// TODO Auto-generated method stub
+		PreparedStatement st = null; 
 		
-		
+		//update somente permitidos a notas de alunos, não se troca matricula,nome,media,status.
+		try {
+			st = conn.prepareStatement(
+					"update alunos " +
+		             "set nome = ?,matricula = ?,data_nascimento = ? " +
+					 "where id_aluno = ?");
+			
+			
+			st.setString(1, obj.getNome());
+			st.setString(2, obj.getMatricula());
+			st.setDate(3,new java.sql.Date(obj.getDataNascimento().getTime()));
+			
+			st.executeUpdate();
+			
+		}catch(SQLException e) {
+			 throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatment(st);
+		}
 
 	}
 
 	@Override
-	public void deleteById(Integer id) {
+	public void deleteByMatricula(String matricula) {
 		// TODO Auto-generated method stub
 		PreparedStatement st = null;
 
 		try {
 			st = conn.prepareStatement("delete from aluno " + "where matricula = ?");
 
-			st.setInt(1, id);
+			st.setString(1, matricula);
 			
 			int rowsaffected = st.executeUpdate();
 
@@ -89,13 +109,13 @@ public class AlunoDaoJdbc implements AlunoDao {
 	}
 
 	@Override
-	public void findById(Integer id) {
+	public void findByStatus(String status) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List<Aluno> findALL() {
+	public List<Alunos> findALL() {
 		// TODO Auto-generated method stub
 		return null;
 	}
